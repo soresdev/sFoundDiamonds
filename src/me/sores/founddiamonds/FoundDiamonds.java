@@ -20,8 +20,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class FoundDiamonds extends JavaPlugin {
 
-    //TODO fix signs, and fix stats not saving properly
-
     private static FoundDiamonds instance;
     private PlayerDataHandler handler;
     private CooldownManager cooldownManager;
