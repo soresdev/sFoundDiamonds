@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="FoundDiamonds:jar">
+    <output-path>$PROJECT_DIR$/../../../MCM Plugins</output-path>
+    <root id="archive" name="FoundDiamonds.jar">
+      <element id="module-output" name="FoundDiamonds" />
+    </root>
+  </artifact>
+</component>
