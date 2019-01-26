@@ -24,7 +24,7 @@ public class Command_reloadconfig implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
 
-            if(!player.hasPermission("sfd.reloadconfig")){
+            if(!player.hasPermission("sfd.reload")){
                 StringUtil.noPerm(player);
                 return true;
             }

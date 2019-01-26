@@ -1,0 +1,10 @@
+broadcast:
+  enabled: true
+signs:
+  enabled: true
+  string: '[oresign]'
+  cooldown: 3
+  line0: '&m----------'
+  line1: '&aOre Stats'
+  line2: 'Right Click!'
+  line3: '&m----------'

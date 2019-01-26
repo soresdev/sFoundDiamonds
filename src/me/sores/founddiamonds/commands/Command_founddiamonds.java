@@ -34,6 +34,11 @@ public class Command_founddiamonds implements CommandExecutor {
         if(sender instanceof Player){
             Player player = (Player) sender;
 
+            if(!player.hasPermission("sfd.founddiamonds")){
+                StringUtil.noPerm(player);
+                return true;
+            }
+
             if(args.length == 0){
                 player.sendMessage(usage);
                 return true;

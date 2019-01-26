@@ -1,0 +1,17 @@
+name: sFoundDiamonds
+main: me.sores.founddiamonds.FoundDiamonds
+version: 1.0
+author: sores
+commands:
+  ores:
+    description: Check another player's or your own ore stats!
+    aliases: [orestats, checkores, getores]
+  founddiamonds:
+    description: Base command for sFoundDiamonds.
+    aliases: [fd]
+  reloadconfig:
+    description: Reload the config file.
+    aliases: [reloadcfg, rlconfig]
+  reloadlang:
+    description: Reload the language file.
+    aliases: []
