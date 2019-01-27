@@ -29,10 +29,8 @@ public class FoundDiamonds extends JavaPlugin {
         instance = this;
         StringUtil.log("&a[sFoundDiamonds] Enabled FoundDiamonds by sores");
 
-        handler = new PlayerDataHandler(instance);
-        cooldownManager = new CooldownManager();
 
-
+        initClasses();
         new Config();
         new Lang();
 
@@ -46,6 +44,11 @@ public class FoundDiamonds extends JavaPlugin {
     public void onDisable(){
         instance = null;
         handler.save();
+    }
+
+    public void initClasses(){
+        handler = new PlayerDataHandler(instance);
+        cooldownManager = new CooldownManager();
     }
 
     public void registerListeners(){

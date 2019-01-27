@@ -23,14 +23,14 @@ public class CooldownManager {
     }
 
     public boolean hasCooldown(UUID uuid){
-        return cooldown.containsKey(uuid);
+        return cooldown.containsKey(uuid) && cooldown.get(uuid) > System.currentTimeMillis();
     }
 
     public void removeCooldown(UUID uuid){
         cooldown.remove(uuid);
     }
 
-    public void addCooldown(UUID uuid){
-        cooldown.put(uuid, System.currentTimeMillis() + (Config.SIGN_COOLDOWN * 1000));
+    public void addCooldown(UUID uuid, Long time){
+        cooldown.put(uuid, time);
     }
 }

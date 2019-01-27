@@ -114,7 +114,7 @@ public class Listener_playerlistener implements Listener {
                 player.sendMessage(ChatColor.GRAY + "Stone: " + ChatColor.RESET + oreData.getStone());
                 player.sendMessage(" ");
 
-                cooldownManager.addCooldown(player.getUniqueId());
+                cooldownManager.addCooldown(player.getUniqueId(), System.currentTimeMillis() + (Config.SIGN_COOLDOWN * 1000));
             }
         }
     }

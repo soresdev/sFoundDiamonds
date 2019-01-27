@@ -53,7 +53,7 @@ public class Command_ores implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
 
                 if(!PlayerUtil.doesExist(target)){
-                    player.sendMessage(StringUtil.color(Lang.NO_PLAYER_FOUND).replace("%player%", target.getName()));
+                    player.sendMessage(StringUtil.color(Lang.NO_PLAYER_FOUND).replace("%player%", args[0]));
                     return true;
                 }
 
