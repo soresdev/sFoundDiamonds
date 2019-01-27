@@ -11,6 +11,7 @@ import me.sores.founddiamonds.listeners.Listener_playerlistener;
 import me.sores.founddiamonds.player.PlayerDataHandler;
 import me.sores.founddiamonds.util.StringUtil;
 import me.sores.founddiamonds.util.cooldown.CooldownManager;
+import me.sores.founddiamonds.util.vault.Vault;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +30,11 @@ public class FoundDiamonds extends JavaPlugin {
         instance = this;
         StringUtil.log("&a[sFoundDiamonds] Enabled FoundDiamonds by sores");
 
+        if(!Vault.setupEconomy()){
+            StringUtil.log("&c[sFoundDiamonds] Plugin Disabled - Missing Vault Dependency");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
 
         initClasses();
         new Config();

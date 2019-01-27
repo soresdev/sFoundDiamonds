@@ -26,6 +26,8 @@ public class Command_founddiamonds implements CommandExecutor {
             StringUtil.color("&b/fd togglecommand <on/off> &f- Toggle Command Sending on/off."),
             StringUtil.color("&b/fd togglesigns <on/off> &f- Toggle Ore Signs on/off."),
             StringUtil.color("&b/fd setcooldown <int> &f- Set the cooldown time for Ore Signs."),
+            StringUtil.color("&b/fd togglereward <on/off> &f- Toggle Reward on/off."),
+            StringUtil.color("&b/fd setrewardmult <int> &f- Set the Reward multiplier."),
             StringUtil.color("&b/fd status &f- View current settings for FoundDiamonds."),
             StringUtil.color("&8&m------------------------------------------------")
     };
@@ -187,6 +189,69 @@ public class Command_founddiamonds implements CommandExecutor {
                         return true;
                     }
                 }
+                case "togglereward":{
+                    if(args.length < 2){
+                        player.sendMessage(StringUtil.color("&cUsage: /fd togglereward <on/off>"));
+                        return true;
+                    }
+
+                    String input = args[1];
+
+                    if(input.toLowerCase().equals("on")){
+                        if(Config.REWARD_ENABLED){
+                            player.sendMessage(StringUtil.color("&cRewards are already enabled."));
+                            return true;
+                        }else{
+                            foundDiamonds.getConfig().set("reward.enabled", true);
+                            foundDiamonds.saveConfig();
+                            new Config();
+                            player.sendMessage(StringUtil.color("&7You have toggled Rewards to &aon."));
+                            return true;
+                        }
+                    }
+
+                    if(input.toLowerCase().equals("off")){
+                        if(!Config.REWARD_ENABLED){
+                            player.sendMessage(StringUtil.color("&cRewards are already disabled."));
+                            return true;
+                        }else{
+                            foundDiamonds.getConfig().set("reward.enabled", false);
+                            foundDiamonds.saveConfig();
+                            new Config();
+                            player.sendMessage(StringUtil.color("&7You have toggled Rewards to &coff."));
+                            return true;
+                        }
+                    }
+
+                    if(!input.toLowerCase().equals("on") || !input.toLowerCase().equals("off")){
+                        player.sendMessage(StringUtil.color("Usage: /fd togglereward <on/off>"));
+                        return true;
+                    }
+                }
+                case "setrewardmult":{
+                    if(args.length < 2){
+                        player.sendMessage(StringUtil.color("&cUsage: /fd setcooldown <int>"));
+                        return true;
+                    }
+
+                    try {
+                        int mult = Integer.parseInt(args[1]);
+
+                        if(mult == Config.REWARD_MULT){
+                            player.sendMessage(StringUtil.color("&cReward mult is already set to " + mult));
+                            return true;
+                        }
+
+                        foundDiamonds.getConfig().set("reward.mult", mult);
+                        foundDiamonds.saveConfig();
+                        new Config();
+                        player.sendMessage(StringUtil.color("&7You have set the Reward Mult to &a" + mult));
+                        return true;
+                    }catch (NumberFormatException ex){
+                        player.sendMessage(StringUtil.color("&cYou must input a proper number."));
+                        return true;
+                    }
+                }
                 case "status":{
 
                     String[] status = {
@@ -196,6 +261,8 @@ public class Command_founddiamonds implements CommandExecutor {
                             StringUtil.color("&bCommand Sending: &f" + Config.COMMAND_ENABLED),
                             StringUtil.color("&bOre Signs: &f" + Config.SIGNS_ENABLED),
                             StringUtil.color("&bOre Sign Cooldown: &f" + Config.SIGN_COOLDOWN),
+                            StringUtil.color("&bReward: &f" + Config.REWARD_ENABLED),
+                            StringUtil.color("&bReward Mult: &f" + Config.REWARD_MULT),
                             StringUtil.color("&8&m------------------------------------------------")
 
                     };

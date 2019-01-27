@@ -1,5 +1,7 @@
 package me.sores.founddiamonds.config;
 
+import java.util.List;
+
 /**
  * Created by sores on 1/25/2019.
  */
@@ -7,9 +9,13 @@ public class Config {
 
     public static boolean BROADCAST_ENABLED = true;
     public static boolean COMMAND_ENABLED = false;
-    public static String COMMAND_STRING = "";
+    public static List<String> COMMAND_STRINGS;
 
-    //sings
+    //rewards
+    public static boolean REWARD_ENABLED = false;
+    public static int REWARD_MULT = 0;
+
+    //signs
     public static boolean SIGNS_ENABLED = true;
     public static int SIGN_COOLDOWN = 0;
     public static String SIGN_STRING = "";
@@ -30,8 +36,11 @@ public class Config {
         LINE_2 = config.getString("signs.line2");
         LINE_3 = config.getString("signs.line3");
 
+        REWARD_ENABLED = config.getBoolean("reward.enabled");
+        REWARD_MULT = config.getInt("reward.mult");
+
         COMMAND_ENABLED = config.getBoolean("command.enabled");
-        COMMAND_STRING = config.getString("command.string");
+        COMMAND_STRINGS = config.getStringList("command.strings");
 
     }
 }

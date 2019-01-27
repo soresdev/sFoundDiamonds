@@ -7,6 +7,7 @@ import me.sores.founddiamonds.player.PlayerData;
 import me.sores.founddiamonds.player.PlayerDataHandler;
 import me.sores.founddiamonds.player.data.PlayerOreData;
 import me.sores.founddiamonds.util.StringUtil;
+import me.sores.founddiamonds.util.vault.Vault;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -99,8 +100,19 @@ public class Listener_orelistener implements Listener{
                     if(Config.COMMAND_ENABLED){
                         CommandSender console = Bukkit.getConsoleSender();
 
-                        console.getServer().dispatchCommand(console, (Config.COMMAND_STRING).replace("%player%", player.getName()));
-                        StringUtil.log("&aSent command");
+                        for(String command : Config.COMMAND_STRINGS){
+                            Bukkit.dispatchCommand(console, command.replace("%player%", player.getName()));
+                        }
+                        StringUtil.log("&a[sFoundDiamonds] Commands executed.");
+                    }
+
+                    if(Config.REWARD_ENABLED){
+                        int reward = found * Config.REWARD_MULT;
+                        String output = String.valueOf(reward);
+
+
+                        Vault.getEconomy().depositPlayer(player, reward);
+                        player.sendMessage(StringUtil.color(Lang.REWARDED.replace("%money%", output)).replace("%amount%", number));
                     }
 
                     oreData.setDiamonds(oreData.getDiamonds() + found);
