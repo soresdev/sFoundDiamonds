@@ -1,6 +1,6 @@
 name: sFoundDiamonds
 main: me.sores.founddiamonds.FoundDiamonds
-version: 1.1
+version: 1.2
 author: sores
 commands:
   ores:
@@ -11,7 +11,7 @@ commands:
     aliases: [fd]
   reloadconfig:
     description: Reload the config file.
-    aliases: [reloadcfg, rlconfig]
+    aliases: [reloadcfg, rlconfig, rlcfg]
   reloadlang:
     description: Reload the language file.
-    aliases: []
+    aliases: [rllang]

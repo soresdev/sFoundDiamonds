@@ -1,0 +1,7 @@
+
+*.class
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/artifacts/FoundDiamonds_jar.xml
+out/production/FoundDiamonds/config.yml
+out/production/FoundDiamonds/plugin.yml

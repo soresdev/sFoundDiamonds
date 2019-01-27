@@ -12,6 +12,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -89,8 +90,17 @@ public class Listener_orelistener implements Listener{
                     int found = getNear(block.getLocation());
                     String number = String.valueOf(found);
 
-                    if(Config.BROADCAST_ENABLED){
-                        Bukkit.broadcastMessage(StringUtil.color(Lang.PREFIX + Lang.FD_MESSAGE.replace("%player%", player.getName()).replace("%amount%", number)));
+                    for(Player online : Bukkit.getOnlinePlayers()){
+                        if(Config.BROADCAST_ENABLED && online.hasPermission("sfd.broadcastsee")){
+                            online.sendMessage(StringUtil.color(Lang.PREFIX + Lang.FD_MESSAGE.replace("%player%", player.getName()).replace("%amount%", number)));
+                        }
+                    }
+
+                    if(Config.COMMAND_ENABLED){
+                        CommandSender console = Bukkit.getConsoleSender();
+
+                        console.getServer().dispatchCommand(console, (Config.COMMAND_STRING).replace("%player%", player.getName()));
+                        StringUtil.log("&aSent command");
                     }
 
                     oreData.setDiamonds(oreData.getDiamonds() + found);

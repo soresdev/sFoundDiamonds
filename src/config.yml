@@ -1,5 +1,8 @@
 broadcast:
   enabled: true
+command:
+  enabled: true
+  string: 'msg %player% Nice Find :D'
 signs:
   enabled: true
   string: '[oresign]'

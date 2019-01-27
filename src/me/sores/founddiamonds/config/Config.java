@@ -6,6 +6,8 @@ package me.sores.founddiamonds.config;
 public class Config {
 
     public static boolean BROADCAST_ENABLED = true;
+    public static boolean COMMAND_ENABLED = false;
+    public static String COMMAND_STRING = "";
 
     //sings
     public static boolean SIGNS_ENABLED = true;
@@ -27,6 +29,9 @@ public class Config {
         LINE_1 = config.getString("signs.line1");
         LINE_2 = config.getString("signs.line2");
         LINE_3 = config.getString("signs.line3");
+
+        COMMAND_ENABLED = config.getBoolean("command.enabled");
+        COMMAND_STRING = config.getString("command.string");
 
     }
 }

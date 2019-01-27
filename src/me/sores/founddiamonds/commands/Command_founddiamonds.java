@@ -23,6 +23,7 @@ public class Command_founddiamonds implements CommandExecutor {
             StringUtil.color("&8&m------------------------------------------------"),
             StringUtil.color("&9&lFound Diamonds Usage:"),
             StringUtil.color("&b/fd toggle <on/off> &f- Toggle FoundDiamond Broadcasting on/off."),
+            StringUtil.color("&b/fd togglecommand <on/off> &f- Toggle Command Sending on/off."),
             StringUtil.color("&b/fd togglesigns <on/off> &f- Toggle Ore Signs on/off."),
             StringUtil.color("&b/fd setcooldown <int> &f- Set the cooldown time for Ore Signs."),
             StringUtil.color("&b/fd status &f- View current settings for FoundDiamonds."),
@@ -81,6 +82,45 @@ public class Command_founddiamonds implements CommandExecutor {
 
                     if(!input.toLowerCase().equals("on") || !input.toLowerCase().equals("off")){
                         player.sendMessage(StringUtil.color("&cUsage: /fd toggle <on/off>"));
+                        return true;
+                    }
+                }
+                case "togglecommand":{
+                    if(args.length < 2){
+                        player.sendMessage(StringUtil.color("&cUsage: /fd togglecommand <on/off>"));
+                        return true;
+                    }
+
+                    String input = args[1];
+
+                    if(input.toLowerCase().equals("on")){
+                        if(Config.COMMAND_ENABLED){
+                            player.sendMessage(StringUtil.color("&cCommand sending is already enabled."));
+                            return true;
+                        }else{
+                            foundDiamonds.getConfig().set("command.enabled", true);
+                            foundDiamonds.saveConfig();
+                            new Config();
+                            player.sendMessage(StringUtil.color("&7You have toggled Command Sending to &aon."));
+                            return true;
+                        }
+                    }
+
+                    if(input.toLowerCase().equals("off")){
+                        if(!Config.COMMAND_ENABLED){
+                            player.sendMessage(StringUtil.color("&cCommand Sending is already disabled."));
+                            return true;
+                        }else{
+                            foundDiamonds.getConfig().set("command.enabled", false);
+                            foundDiamonds.saveConfig();
+                            new Config();
+                            player.sendMessage(StringUtil.color("&7You have toggled Command Sending to &coff."));
+                            return true;
+                        }
+                    }
+
+                    if(!input.toLowerCase().equals("on") || !input.toLowerCase().equals("off")){
+                        player.sendMessage(StringUtil.color("&cUsage: /fd togglecommand <on/off>"));
                         return true;
                     }
                 }
@@ -153,6 +193,7 @@ public class Command_founddiamonds implements CommandExecutor {
                             StringUtil.color("&8&m------------------------------------------------"),
                             StringUtil.color("&9&lFound Diamonds Status:"),
                             StringUtil.color("&bBroadcasting: &f" + Config.BROADCAST_ENABLED),
+                            StringUtil.color("&bCommand Sending: &f" + Config.COMMAND_ENABLED),
                             StringUtil.color("&bOre Signs: &f" + Config.SIGNS_ENABLED),
                             StringUtil.color("&bOre Sign Cooldown: &f" + Config.SIGN_COOLDOWN),
                             StringUtil.color("&8&m------------------------------------------------")
