@@ -43,6 +43,7 @@ public class Command_ores implements CommandExecutor {
                 player.sendMessage(ChatColor.AQUA + "Diamonds: " + ChatColor.RESET + oreData.getDiamonds());
                 player.sendMessage(ChatColor.GOLD + "Gold: " + ChatColor.RESET + oreData.getGold());
                 player.sendMessage(ChatColor.GRAY + "Iron: " + ChatColor.RESET + oreData.getIron());
+                player.sendMessage(ChatColor.DARK_GRAY + "Coal: " + ChatColor.RESET + oreData.getCoal());
                 player.sendMessage(ChatColor.RED + "Redstone: " + ChatColor.RESET + oreData.getRedstone());
                 player.sendMessage(ChatColor.BLUE + "Lapis: " + ChatColor.RESET + oreData.getLapis());
                 player.sendMessage(ChatColor.GREEN + "Emerald: " + ChatColor.RESET + oreData.getEmerald());
@@ -66,6 +67,7 @@ public class Command_ores implements CommandExecutor {
                 player.sendMessage(ChatColor.AQUA + "Diamonds: " + ChatColor.RESET + targetOreData.getDiamonds());
                 player.sendMessage(ChatColor.GOLD + "Gold: " + ChatColor.RESET + targetOreData.getGold());
                 player.sendMessage(ChatColor.GRAY + "Iron: " + ChatColor.RESET + targetOreData.getIron());
+                player.sendMessage(ChatColor.DARK_GRAY + "Coal: " + ChatColor.RESET + targetOreData.getCoal());
                 player.sendMessage(ChatColor.RED + "Redstone: " + ChatColor.RESET + targetOreData.getRedstone());
                 player.sendMessage(ChatColor.BLUE + "Lapis: " + ChatColor.RESET + targetOreData.getLapis());
                 player.sendMessage(ChatColor.GREEN + "Emerald: " + ChatColor.RESET + targetOreData.getEmerald());

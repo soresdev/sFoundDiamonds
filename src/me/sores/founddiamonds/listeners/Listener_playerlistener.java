@@ -108,6 +108,7 @@ public class Listener_playerlistener implements Listener {
                 player.sendMessage(ChatColor.AQUA + "Diamonds: " + ChatColor.RESET + oreData.getDiamonds());
                 player.sendMessage(ChatColor.GOLD + "Gold: " + ChatColor.RESET + oreData.getGold());
                 player.sendMessage(ChatColor.GRAY + "Iron: " + ChatColor.RESET + oreData.getIron());
+                player.sendMessage(ChatColor.DARK_GRAY + "Coal: " + ChatColor.RESET + oreData.getCoal());
                 player.sendMessage(ChatColor.RED + "Redstone: " + ChatColor.RESET + oreData.getRedstone());
                 player.sendMessage(ChatColor.BLUE + "Lapis: " + ChatColor.RESET + oreData.getLapis());
                 player.sendMessage(ChatColor.GREEN + "Emerald: " + ChatColor.RESET + oreData.getEmerald());
