@@ -91,6 +91,8 @@ public class Listener_orelistener implements Listener{
                     int found = getNear(block.getLocation());
                     String number = String.valueOf(found);
 
+                    oreData.setDiamonds(oreData.getDiamonds() + found);
+
                     for(Player online : Bukkit.getOnlinePlayers()){
                         if(Config.BROADCAST_ENABLED && online.hasPermission("sfd.broadcastsee")){
                             online.sendMessage(StringUtil.color(Lang.PREFIX + Lang.FD_MESSAGE.replace("%player%", player.getName()).replace("%amount%", number)));
@@ -114,10 +116,9 @@ public class Listener_orelistener implements Listener{
                         Vault.getEconomy().depositPlayer(player, reward);
                         player.sendMessage(StringUtil.color(Lang.REWARDED.replace("%money%", output)).replace("%amount%", number));
                     }
-
-                    oreData.setDiamonds(oreData.getDiamonds() + found);
-                    break;
                 }
+
+                break;
             }
             case IRON_ORE:{
                 oreData.setIron(oreData.getIron() + 1);
@@ -135,6 +136,11 @@ public class Listener_orelistener implements Listener{
                 break;
             }
             case REDSTONE_ORE:{
+                oreData.setRedstone(oreData.getRedstone() + 1);
+
+                break;
+            }
+            case GLOWING_REDSTONE_ORE:{
                 oreData.setRedstone(oreData.getRedstone() + 1);
 
                 break;

@@ -1,5 +1,10 @@
 broadcast:
   enabled: true
+command:
+  enabled: false
+  strings:
+    - 'msg %player% Nice Find :D'
+    - 'say Hello'
 signs:
   enabled: true
   string: '[oresign]'
@@ -8,3 +13,6 @@ signs:
   line1: '&aOre Stats'
   line2: 'Right Click!'
   line3: '&m----------'
+reward:
+  enabled: false
+  mult: 2
