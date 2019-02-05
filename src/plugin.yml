@@ -1,6 +1,6 @@
 name: sFoundDiamonds
 main: me.sores.founddiamonds.FoundDiamonds
-version: 1.3.2
+version: 1.3.3
 author: sores
 commands:
   ores:

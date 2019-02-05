@@ -92,13 +92,10 @@ public class Listener_playerlistener implements Listener {
             }
 
             if(cooldownManager.hasCooldown(player.getUniqueId())){
-                if(cooldownManager.cooldown.get(player.getUniqueId()) > System.currentTimeMillis()){
-                    String replaced = String.valueOf(cooldownManager.getTimeLeft(player));
-                    player.sendMessage(StringUtil.color(Lang.SIGN_COOLDOWN_MESSAGE).replace("%time%", replaced));
-                    return;
-                }else{
-                    cooldownManager.removeCooldown(player.getUniqueId());
-                }
+                player.sendMessage(StringUtil.color(Lang.SIGN_COOLDOWN_MESSAGE).replace("%time%", cooldownManager.getTimeLeftAsString(player)));
+                return;
+            }else{
+                cooldownManager.removeCooldown(player.getUniqueId());
             }
 
             if(sign.getLine(1).equalsIgnoreCase(StringUtil.color(Config.LINE_1)) && sign.getLine(2).equalsIgnoreCase(StringUtil.color(Config.LINE_2))){

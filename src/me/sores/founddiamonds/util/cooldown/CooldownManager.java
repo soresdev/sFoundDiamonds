@@ -1,7 +1,6 @@
 package me.sores.founddiamonds.util.cooldown;
 
 import com.google.common.collect.Maps;
-import me.sores.founddiamonds.config.Config;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -12,7 +11,7 @@ import java.util.UUID;
  */
 public class CooldownManager {
 
-    public HashMap<UUID, Long> cooldown;
+    private HashMap<UUID, Long> cooldown;
 
     public CooldownManager() {
         this.cooldown = Maps.newHashMap();
@@ -20,6 +19,10 @@ public class CooldownManager {
 
     public int getTimeLeft(Player player){
         return Math.toIntExact(Math.round((cooldown.get(player.getUniqueId()) - System.currentTimeMillis())/1000));
+    }
+
+    public String getTimeLeftAsString(Player player){
+        return String.valueOf(getTimeLeft(player));
     }
 
     public boolean hasCooldown(UUID uuid){
@@ -32,5 +35,9 @@ public class CooldownManager {
 
     public void addCooldown(UUID uuid, Long time){
         cooldown.put(uuid, time);
+    }
+
+    public HashMap<UUID, Long> getCooldown() {
+        return cooldown;
     }
 }
