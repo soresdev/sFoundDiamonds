@@ -22,4 +22,8 @@ public class StringUtil {
         Bukkit.getConsoleSender().sendMessage(color(message));
     }
 
+    public static String intToString(int intt){
+        return String.valueOf(intt);
+    }
+
 }

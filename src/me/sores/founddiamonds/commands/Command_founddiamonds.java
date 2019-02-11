@@ -230,7 +230,7 @@ public class Command_founddiamonds implements CommandExecutor {
                 }
                 case "setrewardmult":{
                     if(args.length < 2){
-                        player.sendMessage(StringUtil.color("&cUsage: /fd setcooldown <int>"));
+                        player.sendMessage(StringUtil.color("&cUsage: /fd setrewardmult <int>"));
                         return true;
                     }
 
