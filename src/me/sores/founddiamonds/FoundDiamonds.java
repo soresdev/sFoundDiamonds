@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
 /**
  * Created by sores on 1/24/2019.
  */
@@ -67,8 +68,8 @@ public class FoundDiamonds extends JavaPlugin {
     public void registerCommands(){
         getCommand("ores").setExecutor(new Command_ores(this));
         getCommand("founddiamonds").setExecutor(new Command_founddiamonds(this));
-        getCommand("reloadconfig").setExecutor(new Command_reloadconfig(this));
-        getCommand("reloadlang").setExecutor(new Command_reloadlang(this));
+        getCommand("fdreloadconfig").setExecutor(new Command_reloadconfig(this));
+        getCommand("fdreloadlang").setExecutor(new Command_reloadlang(this));
     }
 
     public static FoundDiamonds getInstance() {

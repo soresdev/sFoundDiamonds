@@ -3,6 +3,7 @@ package me.sores.founddiamonds.commands;
 import me.sores.founddiamonds.FoundDiamonds;
 import me.sores.founddiamonds.config.Config;
 import me.sores.founddiamonds.util.StringUtil;
+import me.sores.founddiamonds.util.cooldown.CooldownManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,9 +15,11 @@ import org.bukkit.entity.Player;
 public class Command_founddiamonds implements CommandExecutor {
 
     private FoundDiamonds foundDiamonds;
+    private CooldownManager cooldownManager;
 
     public Command_founddiamonds(FoundDiamonds foundDiamonds) {
         this.foundDiamonds = foundDiamonds;
+        this.cooldownManager = new CooldownManager();
     }
 
     private String[] usage = {
@@ -25,6 +28,7 @@ public class Command_founddiamonds implements CommandExecutor {
             StringUtil.color("&b/fd toggle <on/off> &f- Toggle FoundDiamond Broadcasting on/off."),
             StringUtil.color("&b/fd togglecommand <on/off> &f- Toggle Command Sending on/off."),
             StringUtil.color("&b/fd togglesigns <on/off> &f- Toggle Ore Signs on/off."),
+            StringUtil.color("&b/fd togglecooldown <on/off> &f- Toggle Ore Sign cooldown on/off."),
             StringUtil.color("&b/fd setcooldown <int> &f- Set the cooldown time for Ore Signs."),
             StringUtil.color("&b/fd togglereward <on/off> &f- Toggle Reward on/off."),
             StringUtil.color("&b/fd setrewardmult <int> &f- Set the Reward multiplier."),
@@ -165,6 +169,47 @@ public class Command_founddiamonds implements CommandExecutor {
                         return true;
                     }
                 }
+                case "togglecooldown":{
+                    if(args.length < 2){
+                        player.sendMessage(StringUtil.color("&cUsage: /fd togglecooldown <on/off>"));
+                        return true;
+                    }
+
+                    String input = args[1];
+
+                    if(input.toLowerCase().equals("on")){
+                        if(Config.SIGN_COOLDOWN_ENABLED){
+                            player.sendMessage(StringUtil.color("&cSign cooldowns are already enabled."));
+                            return true;
+                        }else{
+                            foundDiamonds.getConfig().set("signs.cooldown.enabled", true);
+                            foundDiamonds.saveConfig();
+                            new Config();
+                            player.sendMessage(StringUtil.color("&7You have toggled Ore Sign cooldowns to &aon."));
+                            return true;
+                        }
+                    }
+
+                    if(input.toLowerCase().equals("off")){
+                        if(!Config.SIGN_COOLDOWN_ENABLED){
+                            player.sendMessage(StringUtil.color("&cSign cooldowns are already disabled."));
+                            return true;
+                        }else{
+                            foundDiamonds.getConfig().set("signs.cooldown.enabled", false);
+                            foundDiamonds.saveConfig();
+                            new Config();
+                            player.sendMessage(StringUtil.color("&7You have toggled Ore Sign cooldowns to &coff."));
+
+                            cooldownManager.clean(); //anyone on cooldown at time it's disabled will be cleared
+                            return true;
+                        }
+                    }
+
+                    if(!input.toLowerCase().equals("on") || !input.toLowerCase().equals("off")){
+                        player.sendMessage(StringUtil.color("&cUsage: /fd togglecooldown <on/off>"));
+                        return true;
+                    }
+                }
                 case "setcooldown":{
                     if(args.length < 2){
                         player.sendMessage(StringUtil.color("&cUsage: /fd setcooldown <int>"));
@@ -174,12 +219,12 @@ public class Command_founddiamonds implements CommandExecutor {
                     try {
                         int cooldown = Integer.parseInt(args[1]);
 
-                        if(cooldown == Config.SIGN_COOLDOWN){
+                        if(cooldown == Config.SIGN_COOLDOWN_TIME){
                             player.sendMessage(StringUtil.color("&cThe sign cooldown is already set to " + cooldown + "."));
                             return true;
                         }
 
-                        foundDiamonds.getConfig().set("signs.cooldown", cooldown);
+                        foundDiamonds.getConfig().set("signs.cooldown.time", cooldown);
                         foundDiamonds.saveConfig();
                         new Config();
                         player.sendMessage(StringUtil.color("&7You have set the Ore Sign cooldown to &a" + cooldown + "."));
@@ -260,7 +305,8 @@ public class Command_founddiamonds implements CommandExecutor {
                             StringUtil.color("&bBroadcasting: &f" + Config.BROADCAST_ENABLED),
                             StringUtil.color("&bCommand Sending: &f" + Config.COMMAND_ENABLED),
                             StringUtil.color("&bOre Signs: &f" + Config.SIGNS_ENABLED),
-                            StringUtil.color("&bOre Sign Cooldown: &f" + Config.SIGN_COOLDOWN),
+                            StringUtil.color("&bOre Sign Cooldown: &f" + Config.SIGN_COOLDOWN_ENABLED),
+                            StringUtil.color("&bOre Sign Cooldown Time: &f" + Config.SIGN_COOLDOWN_TIME),
                             StringUtil.color("&bReward: &f" + Config.REWARD_ENABLED),
                             StringUtil.color("&bReward Mult: &f" + Config.REWARD_MULT),
                             StringUtil.color("&8&m------------------------------------------------")

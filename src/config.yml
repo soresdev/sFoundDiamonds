@@ -8,11 +8,13 @@ command:
 signs:
   enabled: true
   string: '[oresign]'
-  cooldown: 3
   line0: '&m----------'
   line1: '&aOre Stats'
   line2: 'Right Click!'
   line3: '&m----------'
+  cooldown:
+    enabled: true
+    time: 3
 reward:
   enabled: false
   mult: 2

@@ -91,11 +91,13 @@ public class Listener_playerlistener implements Listener {
                 return;
             }
 
-            if(cooldownManager.hasCooldown(player.getUniqueId())){
-                player.sendMessage(StringUtil.color(Lang.SIGN_COOLDOWN_MESSAGE).replace("%time%", cooldownManager.getTimeLeftAsString(player)));
-                return;
-            }else{
-                cooldownManager.removeCooldown(player.getUniqueId());
+            if(Config.SIGN_COOLDOWN_ENABLED){
+                if(cooldownManager.hasCooldown(player.getUniqueId())){
+                    player.sendMessage(StringUtil.color(Lang.SIGN_COOLDOWN_MESSAGE).replace("%time%", cooldownManager.getTimeLeftAsString(player)));
+                    return;
+                }else{
+                    cooldownManager.removeCooldown(player.getUniqueId());
+                }
             }
 
             if(sign.getLine(1).equalsIgnoreCase(StringUtil.color(Config.LINE_1)) && sign.getLine(2).equalsIgnoreCase(StringUtil.color(Config.LINE_2))){
@@ -112,7 +114,9 @@ public class Listener_playerlistener implements Listener {
                 player.sendMessage(ChatColor.GRAY + "Stone: " + ChatColor.RESET + oreData.getStone());
                 player.sendMessage(" ");
 
-                cooldownManager.addCooldown(player.getUniqueId(), System.currentTimeMillis() + (Config.SIGN_COOLDOWN * 1000));
+                if(Config.SIGN_COOLDOWN_ENABLED){
+                    cooldownManager.addCooldown(player.getUniqueId(), System.currentTimeMillis() + (Config.SIGN_COOLDOWN_TIME * 1000));
+                }
             }
         }
     }

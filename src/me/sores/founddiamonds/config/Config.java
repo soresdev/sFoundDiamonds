@@ -17,7 +17,8 @@ public class Config {
 
     //signs
     public static boolean SIGNS_ENABLED = true;
-    public static int SIGN_COOLDOWN = 0;
+    public static int SIGN_COOLDOWN_TIME = 0;
+    public static boolean SIGN_COOLDOWN_ENABLED;
     public static String SIGN_STRING = "";
     public static String LINE_0 = "";
     public static String LINE_1 = "";
@@ -29,7 +30,8 @@ public class Config {
 
         BROADCAST_ENABLED = config.getBoolean("broadcast.enabled");
         SIGNS_ENABLED = config.getBoolean("signs.enabled");
-        SIGN_COOLDOWN = config.getInt("signs.cooldown");
+        SIGN_COOLDOWN_TIME = config.getInt("signs.cooldown.time");
+        SIGN_COOLDOWN_ENABLED = config.getBoolean("signs.cooldown.enabled");
         SIGN_STRING = config.getString("signs.string");
         LINE_0 = config.getString("signs.line0");
         LINE_1 = config.getString("signs.line1");

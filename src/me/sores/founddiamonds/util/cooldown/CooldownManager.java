@@ -37,6 +37,12 @@ public class CooldownManager {
         cooldown.put(uuid, time);
     }
 
+    public void clean(){
+        if(!cooldown.isEmpty() || cooldown.size() >= 1){
+            cooldown.clear();
+        }
+    }
+
     public HashMap<UUID, Long> getCooldown() {
         return cooldown;
     }
