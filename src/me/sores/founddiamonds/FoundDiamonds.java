@@ -29,7 +29,6 @@ public class FoundDiamonds extends JavaPlugin {
     @Override
     public void onEnable(){
         instance = this;
-        StringUtil.log("&a[sFoundDiamonds] Enabled FoundDiamonds by sores");
 
         if(!Vault.setupEconomy()){
             StringUtil.log("&c[sFoundDiamonds] Plugin Disabled - Missing Vault Dependency");
@@ -45,6 +44,8 @@ public class FoundDiamonds extends JavaPlugin {
 
         registerCommands();
         registerListeners();
+
+        StringUtil.log("&a[sFoundDiamonds] Enabled FoundDiamonds by sores");
     }
 
     @Override

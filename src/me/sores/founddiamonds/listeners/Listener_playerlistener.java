@@ -86,36 +86,39 @@ public class Listener_playerlistener implements Listener {
         if(event.getAction() == Action.RIGHT_CLICK_BLOCK && block.getState() instanceof Sign){
             Sign sign = (Sign) block.getState();
 
-            if(!Config.SIGNS_ENABLED){
-                player.sendMessage(StringUtil.color(Lang.SIGN_DISABLED));
-                return;
-            }
+            if(sign.getLine(1).equalsIgnoreCase(StringUtil.color(Config.LINE_1))){
 
-            if(Config.SIGN_COOLDOWN_ENABLED){
-                if(cooldownManager.hasCooldown(player.getUniqueId())){
-                    player.sendMessage(StringUtil.color(Lang.SIGN_COOLDOWN_MESSAGE).replace("%time%", cooldownManager.getTimeLeftAsString(player)));
+                if(!Config.SIGNS_ENABLED){
+                    player.sendMessage(StringUtil.color(Lang.SIGN_DISABLED));
                     return;
-                }else{
-                    cooldownManager.removeCooldown(player.getUniqueId());
                 }
-            }
-
-            if(sign.getLine(1).equalsIgnoreCase(StringUtil.color(Config.LINE_1)) && sign.getLine(2).equalsIgnoreCase(StringUtil.color(Config.LINE_2))){
-
-                player.sendMessage(" ");
-                player.sendMessage(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "======" + ChatColor.YELLOW + " Ore Stats " + ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "======");
-                player.sendMessage(ChatColor.AQUA + "Diamonds: " + ChatColor.RESET + oreData.getDiamonds());
-                player.sendMessage(ChatColor.GOLD + "Gold: " + ChatColor.RESET + oreData.getGold());
-                player.sendMessage(ChatColor.GRAY + "Iron: " + ChatColor.RESET + oreData.getIron());
-                player.sendMessage(ChatColor.DARK_GRAY + "Coal: " + ChatColor.RESET + oreData.getCoal());
-                player.sendMessage(ChatColor.RED + "Redstone: " + ChatColor.RESET + oreData.getRedstone());
-                player.sendMessage(ChatColor.BLUE + "Lapis: " + ChatColor.RESET + oreData.getLapis());
-                player.sendMessage(ChatColor.GREEN + "Emerald: " + ChatColor.RESET + oreData.getEmerald());
-                player.sendMessage(ChatColor.GRAY + "Stone: " + ChatColor.RESET + oreData.getStone());
-                player.sendMessage(" ");
 
                 if(Config.SIGN_COOLDOWN_ENABLED){
-                    cooldownManager.addCooldown(player.getUniqueId(), System.currentTimeMillis() + (Config.SIGN_COOLDOWN_TIME * 1000));
+                    if(cooldownManager.hasCooldown(player.getUniqueId())){
+                        player.sendMessage(StringUtil.color(Lang.SIGN_COOLDOWN_MESSAGE).replace("%time%", cooldownManager.getTimeLeftAsString(player)));
+                        return;
+                    }else{
+                        cooldownManager.removeCooldown(player.getUniqueId());
+                    }
+                }
+
+                if(sign.getLine(1).equalsIgnoreCase(StringUtil.color(Config.LINE_1)) && sign.getLine(2).equalsIgnoreCase(StringUtil.color(Config.LINE_2))){
+
+                    player.sendMessage(" ");
+                    player.sendMessage(ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "======" + ChatColor.YELLOW + " Ore Stats " + ChatColor.DARK_GRAY.toString() + ChatColor.STRIKETHROUGH + "======");
+                    player.sendMessage(ChatColor.AQUA + "Diamonds: " + ChatColor.RESET + oreData.getDiamonds());
+                    player.sendMessage(ChatColor.GOLD + "Gold: " + ChatColor.RESET + oreData.getGold());
+                    player.sendMessage(ChatColor.GRAY + "Iron: " + ChatColor.RESET + oreData.getIron());
+                    player.sendMessage(ChatColor.DARK_GRAY + "Coal: " + ChatColor.RESET + oreData.getCoal());
+                    player.sendMessage(ChatColor.RED + "Redstone: " + ChatColor.RESET + oreData.getRedstone());
+                    player.sendMessage(ChatColor.BLUE + "Lapis: " + ChatColor.RESET + oreData.getLapis());
+                    player.sendMessage(ChatColor.GREEN + "Emerald: " + ChatColor.RESET + oreData.getEmerald());
+                    player.sendMessage(ChatColor.GRAY + "Stone: " + ChatColor.RESET + oreData.getStone());
+                    player.sendMessage(" ");
+
+                    if(Config.SIGN_COOLDOWN_ENABLED){
+                        cooldownManager.addCooldown(player.getUniqueId(), System.currentTimeMillis() + (Config.SIGN_COOLDOWN_TIME * 1000));
+                    }
                 }
             }
         }
