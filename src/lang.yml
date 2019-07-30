@@ -1,7 +1,7 @@
 NO_PERMISSION: '&cNo Permission.'
 NO_PLAYER_FOUND: '&cNo player online with the name: &e%player%'
 PREFIX: '&8&l(&9&lFD&8&l) '
-FD_MESSAGE: '&b%player% found &f%amount% &bdiamonds.'
+FD_MESSAGE: '&b%player% found &f%amount% &b%replace%.'
 SIGN_COOLDOWN_MESSAGE: '&7You must wait &c%time%s &7to use this again.'
 SIGN_DISABLED: '&cOre Stat signs are currently disabled.'
 REWARDED: '&aYou were rewarded $%money% for finding %amount% diamonds!'

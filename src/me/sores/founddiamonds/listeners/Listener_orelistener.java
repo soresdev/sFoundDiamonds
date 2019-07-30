@@ -95,7 +95,8 @@ public class Listener_orelistener implements Listener{
 
                     for(Player online : Bukkit.getOnlinePlayers()){
                         if(Config.BROADCAST_ENABLED && online.hasPermission("sfd.broadcastsee")){
-                            online.sendMessage(StringUtil.color(Lang.PREFIX + Lang.FD_MESSAGE.replace("%player%", player.getName()).replace("%amount%", number)));
+                            online.sendMessage(StringUtil.color(Lang.PREFIX + Lang.FD_MESSAGE.replace("%player%", player.getName()).replace("%amount%", number))
+                            .replace("%replace%", found > 1 ? "diamonds" : "diamond"));
                         }
                     }
 
